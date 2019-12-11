@@ -1,4 +1,4 @@
-from rest_framework.parsers import FileUploadParser
+from rest_framework.parsers import JSONParser, MultiPartParser
 from rest_framework.response import Response
 from rest_framework.views import APIView
 from rest_framework import status
@@ -6,9 +6,9 @@ from .serializers import FileSerializer
 
 # Create your views here.
 class FileUploadView(APIView):
-    parser_classes = (FileUploadParser,)
+    parser_classes = (JSONParser, MultiPartParser)
 
-    def post(self, request, *args, **kwargs):
+    def post(self, request):
 
         file_serializer = FileSerializer(data=request.data)
 
