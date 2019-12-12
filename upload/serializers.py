@@ -4,18 +4,17 @@ from .models import File
 import textract
 
 class FileSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = File
-        fields = ('file', 'title')
 
-
-class pdf_text(ModelSerializer):
-
-    text = SerializerMethodField()
+    text = SerializerMethodField('get_text')
 
     class Meta:
         model = File
+        fields = '__all__'
 
     def get_text(self, obj):
-        textract.process('api/media/testando.pdf')
-        return str(obj.text.text)
+        text = textract.process('api/media/testando.pdf')
+        return text
+
+
+
+
