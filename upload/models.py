@@ -4,5 +4,6 @@ from django.db import models
 class File(models.Model):
     file = models.FileField(blank=False, null=False)
     title = models.CharField(max_length=100)
+    text = models.TextField()
     def __str__(self):
         return self.title
